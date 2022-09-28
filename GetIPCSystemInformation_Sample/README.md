@@ -57,7 +57,7 @@ HKLM\SOFTWARE\Beckhoff\IPC
 ```
 
 #### 1.	Image Version:
-Get image:
+**Get image:**
 ```
 Reg query HKLM\SOFTWARE\Beckhoff\IPC /v Image
 ```
@@ -67,7 +67,7 @@ Output is for example:
 Image      REG_SZ      IN-0406-0112-02-1
 ```
 
-Get version:
+**Get version**:
 ```
 Reg query HKLM\SOFTWARE\Beckhoff\IPC /v Version
 ```
@@ -81,8 +81,9 @@ Reg query HKLM\SOFTWARE\Beckhoff\IPC /v EditionId
 ```
 
 Output is for example:  
+``` 
 EditionId       REG_SZ       2016 LTSB
-
+``` 
 #### 2.	Driver Package
 Get driver package:
 
@@ -102,7 +103,7 @@ Reg query HKLM\SOFTWARE\Beckhoff\IPC /v platform
 Output is for example:  
 Platform       REG_SZ       CB3064
 
-4.	Device information:
+#### 4.	Device information:
 Get computer name:
 ```
 Reg query HKLM\SOFTWARE\Beckhoff\IPC /v LastComputerName
@@ -119,7 +120,7 @@ Reg query HKLM\SOFTWARE\Beckhoff\IPC /v FirstMACId
 Output is for example:  
 LastComputerName       REG_BINARY       0000105xxxxxx
 
-5.	OS Update Build Revision
+#### 5.	OS Update Build Revision
 Get Update Build Revision in hex:
 ```
 Reg query “HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion” /v UBR 
