@@ -8,7 +8,7 @@ Running the following commands will help you to gather system information using 
 #### 1.	General Baseboard Information:
 
 ```
-Wmic baseboard
+wmic baseboard list full
 ```
 
 Output is for example:  
