@@ -11,9 +11,9 @@ Running the following commands will help you to gather system information using 
 Wmic baseboard
 ```
 
-Output is for example:
--	Product: CB6464
--	Version: G3
+Output is for example:  
+Product: CB6464
+Version: G3
 
 
 #### 2.	Installed Windows Updates:
@@ -36,7 +36,7 @@ to get a complete overview of all updates and their information (e.g. descriptio
 Wmic os get BuildNumber
 ```
 
-Output is:
+Output is:  
 Buildnumber
 14393
 
@@ -62,7 +62,7 @@ Get image:
 Reg query HKLM\SOFTWARE\Beckhoff\IPC /v Image
 ```
 
-Output is for example:
+Output is for example:  
 Image			REG_SZ	IN-0406-0112-02-1
 
 Get version:
@@ -70,7 +70,7 @@ Get version:
 Reg query HKLM\SOFTWARE\Beckhoff\IPC /v Version
 ```
 
-Output is for example:
+Output is for example:  
 Version		REG_SZ	2020-20-0001U
 
 Get edition:
@@ -78,7 +78,7 @@ Get edition:
 Reg query HKLM\SOFTWARE\Beckhoff\IPC /v EditionId
 ```
 
-Output is for example:
+Output is for example:  
 EditionId		REG_SZ	2016 LTSB
 
 #### 2.	Driver Package
@@ -88,7 +88,7 @@ Get driver package:
 Reg query HKLM\SOFTWARE\Beckhoff\IPC /v DriverPackage
 ```
 
-Output is for example:
+Output is for example:  
 Driverpackage 	REG_SZ	3.1.8
 
 #### 3.	Baseboard:
@@ -97,7 +97,7 @@ Get baseboard:
 Reg query HKLM\SOFTWARE\Beckhoff\IPC /v platform
 ```
 
-Output is for example:
+Output is for example:  
 Platform 		REG_SZ	CB3064
 
 4.	Device information:
@@ -106,7 +106,7 @@ Get computer name:
 Reg query HKLM\SOFTWARE\Beckhoff\IPC /v LastComputerName
 ```
 
-Output is for example:
+Output is for example:  
 LastComputerName 		REG_SZ	CP-XXXXXX
 
 Get MAC:
@@ -114,7 +114,7 @@ Get MAC:
 Reg query HKLM\SOFTWARE\Beckhoff\IPC /v FirstMACId
 ```
 
-Output is for example:
+Output is for example:  
 LastComputerName 		REG_BINARY	0000105xxxxxx
 
 5.	OS Update Build Revision
@@ -123,5 +123,5 @@ Get Update Build Revision in hex:
 Reg query “HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion” /v UBR 
 ```
 
-Output is for example:
+Output is for example:  
 LastComputerName 		REG_DWORD	0xea6
