@@ -52,8 +52,9 @@ reg query <keyname> /s
 ```
 
 Image and device information in Beckhoff Images can be found at:
-**HKLM\SOFTWARE\Beckhoff\IPC**
-
+```
+HKLM\SOFTWARE\Beckhoff\IPC
+```
 
 #### 1.	Image Version:
 Get image:
