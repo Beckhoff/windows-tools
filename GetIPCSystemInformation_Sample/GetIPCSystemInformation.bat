@@ -1,6 +1,7 @@
 @echo off
 
-Echo General Baseboard Information 
+Echo General Baseboard Information
+Echo see https://github.com/Beckhoff/windows-tools/tree/main/GetIPCSystemInformation_Sample
 wmic baseboard list full
 pause
 
