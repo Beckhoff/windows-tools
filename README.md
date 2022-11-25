@@ -7,4 +7,9 @@ for Windows Images made by Beckhoff.
 
 * **[GetIPCSystemInformation_Sample](GetIPCSystemInformation_Sample/README.md)**
     
-    This is an example to get some helpful system information about your Beckhoff Windows images
+    This is an example to get some helpful system information about your Beckhoff Windows images  
+
+* **[ConfigureBasicSystem_Sample](ConfigureBasicSystem_Sample/README.md)**
+    
+    This is an example to do basic configurations in a Beckhoff Windows image
+
