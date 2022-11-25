@@ -11,5 +11,5 @@ for Windows Images made by Beckhoff.
 
 * **[ConfigureBasicSystem_Sample](ConfigureBasicSystem_Sample/README.md)**
     
-    This is an example to do basic configurations in a Beckhoff Windows image
+    This is an example to do basic configurations in a Beckhoff Windows image (general system and TwinCAT) 
 
