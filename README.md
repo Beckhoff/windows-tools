@@ -13,3 +13,6 @@ for Windows Images made by Beckhoff.
     
     This is an example to do basic configurations in a Beckhoff Windows image (general system and TwinCAT) 
 
+* **[Bitlocker_Samples](Bitlocker_Samples/README.md)**
+    
+    These examples can be used to configure or modify the bitlocker settings e.g. turn on / off
