@@ -21,7 +21,7 @@ for Windows Images made by Beckhoff.
     
     These examples can be used to configure or modify the bitlocker settings e.g. turn on / off
 
-* **[SilentInstallation_Samples](SilentInstallation_Samples/README.md)**
+* **[SilentInstallation_Samples](SilentInstallation_Samples/readme.md)**
     
     These examples show the silent parameters for TwinCAT 3.1 Build 4024 and its TwinCAT Functions
 
