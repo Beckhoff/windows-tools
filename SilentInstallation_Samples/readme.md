@@ -7,9 +7,14 @@ The samples listed below list actual installation file versions. New versions ma
 Remark:
 Sometimes a parameter "REBOOT=ReallySuppress" is used. It suppresses all reboots and reboot prompts at the end of the installation. The installation is properly finished after a reboot of all silent installations.
 
-**TwinCAT Engineering (XAE):**
+**TwinCAT Engineering (XAE) without Git:**
 ```
 TC31-FULL-Setup.3.1.4024.55.exe /s /clone_wait /v"/qr REBOOT=ReallySuppress ALLUSERS=1 ACTIVATETCXAESHELLSETTINGS=1"
+```
+
+**TwinCAT Engineering (XAE) with Git:**
+```
+TC31-FULL-Setup.3.1.4024.55.exe /s /clone_wait /v"/qr REBOOT=ReallySuppress ALLUSERS=1 ACTIVATETCXAESHELLSETTINGS=1 GIT_FOR_WINDOWS_MINIMAL_INSTALL_AND_ACCEPT_LICENSE=1""
 ```
 
 **TwinCAT Runtime (XAR):**
