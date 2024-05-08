@@ -25,6 +25,6 @@ for Windows Images made by Beckhoff.
     
     These examples show the silent parameters for TwinCAT 3.1 Build 4024 and its TwinCAT Functions
 
-* **[WindowsUpdates_Samples](WindowsUpdates_Samples/readme.md)**
+* **[WindowsUpdates_Samples](WindowsUpdates_Sample/readme.md)**
     
     These examples can be used to install Windows security updates
