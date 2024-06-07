@@ -30,9 +30,14 @@ TC31-XAR-Setup.3.1.4024.55.exe /s /clone_wait /v"/qr REBOOT=ReallySuppress ALLUS
 TF1810_1.7.5.1.exe /s /clone_wait /v"/qr REBOOT=ReallySuppress ALLUSERS=1"
 ```
 
-**TF2000 | TwinCAT 3 HMI Server**
+**TF2000 | TwinCAT 3 HMI Server (32 Bit)**
 ```
 TF2000_1.12.760.59.exe /s /clone_wait /v"/qr REBOOT=ReallySuppress ALLUSERS=1"
+```
+
+**TF2000 | TwinCAT 3 HMI Server (64 Bit)**
+```
+TF2000_1.12.760.59.exe /s /clone_wait /v"/qr REBOOT=ReallySuppress ALLUSERS=1 HMISERVERARCHITECTURE=64"
 ```
 
 **TF3300 | TwinCAT 3 Scope Server (XAE)**
