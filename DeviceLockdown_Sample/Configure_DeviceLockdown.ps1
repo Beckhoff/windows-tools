@@ -1,5 +1,5 @@
 # Configures the Device Lockdown Features of Windows IoT Enterprsie  
-# Version 1.3
+# Version 1.4
 
 # Official Microsoft Documentation:
 # https://learn.microsoft.com/en-us/windows-hardware/customize/enterprise/shell-launcher
@@ -15,7 +15,7 @@
 $ConfigureShellLauncher=$TRUE
 $ConfigNewUser=$TRUE #Resets existing user and creates a new one with user rights and configered Autologon
 $username = "Operator"
-$password = "1"
+$password = "123" # The defined  password must comply with the password policy. Default: Minimum password length = 3 characters
 $customShellApp="C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --kiosk www.beckhoff.com --edge-kiosk-type=fullscreen"
 
 # Define actions to take when the shell program exits.
@@ -261,6 +261,11 @@ function Configure-ShellLauncher
             Remove-LocalUser -Name $username
         }
         New-LocalUser -Name $username -FullName $username -Description "Standard Windows user for custom shell" -Password $passwordSec
+        if ($null -eq $newUser) {
+         
+            Log-Message ("The user "+$username+" cannot be created")
+            exit
+         }
         Set-LocalUser $username -PasswordNeverExpires $TRUE 
         Log-Message ("The Useer "+$username+" was created succesfully")
         # Make the user part of the User group
