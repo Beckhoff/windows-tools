@@ -1,5 +1,5 @@
 # Configures the Device Lockdown Features of Windows IoT Enterprsie  
-# Version 1.4
+# Version 1.5
 
 # Official Microsoft Documentation:
 # https://learn.microsoft.com/en-us/windows-hardware/customize/enterprise/shell-launcher
@@ -111,11 +111,10 @@ function Enable-LockdownFeatures
     }
     if($ConfigureKeyboardFilter -eq $TRUE)
     {        
-        $DismOutput = & Dism.exe /online /get-featureinfo /featurename:Client-KeyboardFilter
-        $DismOutput = $DismOutput |
-        Where-Object {$_ -match 'State :'} 
-        $DismOutput=$DismOutput.replace('State : ','')
-        if($DismOutput -eq 'Disabled')
+        $featureName = "Client-KeyboardFilter"
+        $featureStatus = Get-WindowsOptionalFeature -Online -FeatureName $featureName
+        $isEnabled = $featureStatus.State -eq 'Enabled'
+        if(!$isEnabled)
         {
             try
             {
@@ -142,11 +141,10 @@ function Enable-LockdownFeatures
 
     if($ConfigureUnbrandedBoot -eq $TRUE)
     {        
-        $DismOutput = & Dism.exe /online /get-featureinfo /featurename:Client-EmbeddedBootExp
-        $DismOutput = $DismOutput |
-        Where-Object {$_ -match 'State :'} 
-        $DismOutput=$DismOutput.replace('State : ','')
-        if($DismOutput -eq 'Disabled')
+        $featureName = "Client-EmbeddedBootExp"
+        $featureStatus = Get-WindowsOptionalFeature -Online -FeatureName $featureName
+        $isEnabled = $featureStatus.State -eq 'Enabled'
+        if(!$isEnabled)
         {
             try
             {
@@ -172,11 +170,10 @@ function Enable-LockdownFeatures
     }
     if($ConfigureCustomLogon -eq $TRUE)
     {        
-        $DismOutput = & Dism.exe /online /get-featureinfo /featurename:Client-EmbeddedLogon
-        $DismOutput = $DismOutput |
-        Where-Object {$_ -match 'State :'} 
-        $DismOutput=$DismOutput.replace('State : ','')
-        if($DismOutput -eq 'Disabled')
+        $featureName = "Client-EmbeddedLogon"
+        $featureStatus = Get-WindowsOptionalFeature -Online -FeatureName $featureName
+        $isEnabled = $featureStatus.State -eq 'Enabled'
+        if(!$isEnabled)
         {
             try
             {
@@ -260,14 +257,14 @@ function Configure-ShellLauncher
             $Global:ShellLauncherClass.RemoveCustomShell($User_Old_SID)
             Remove-LocalUser -Name $username
         }
-        New-LocalUser -Name $username -FullName $username -Description "Standard Windows user for custom shell" -Password $passwordSec
+        $newUser=New-LocalUser -Name $username -FullName $username -Description "Standard Windows user for custom shell" -Password $passwordSec
         if ($null -eq $newUser) {
          
             Log-Message ("The user "+$username+" cannot be created")
             exit
          }
         Set-LocalUser $username -PasswordNeverExpires $TRUE 
-        Log-Message ("The Useer "+$username+" was created succesfully")
+        Log-Message ("The User "+$username+" was created succesfully")
         # Make the user part of the User group
         Add-LocalGroupMember -Group "Users" -Member $username
 
