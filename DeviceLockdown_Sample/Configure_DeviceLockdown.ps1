@@ -1,5 +1,5 @@
 # Configures the Device Lockdown Features of Windows IoT Enterprsie  
-# Version 1.5
+# Version 1.6
 
 # Official Microsoft Documentation:
 # https://learn.microsoft.com/en-us/windows-hardware/customize/enterprise/shell-launcher
@@ -266,7 +266,9 @@ function Configure-ShellLauncher
         Set-LocalUser $username -PasswordNeverExpires $TRUE 
         Log-Message ("The User "+$username+" was created succesfully")
         # Make the user part of the User group
-        Add-LocalGroupMember -Group "Users" -Member $username
+        $groupSID = "S-1-5-32-545" #SID of the Users Group
+        Add-LocalGroupMember -SID $groupSID -Member $username
+
 
 
         ##################################
