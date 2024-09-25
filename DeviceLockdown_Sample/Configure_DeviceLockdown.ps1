@@ -1,5 +1,5 @@
 # Configures the Device Lockdown Features of Windows IoT Enterprsie  
-# Version 1.6
+# Version 1.7
 
 # Official Microsoft Documentation:
 # https://learn.microsoft.com/en-us/windows-hardware/customize/enterprise/shell-launcher
@@ -27,6 +27,12 @@ $Shell_Launcher_Exit_Action = 0  # Restart Shell
 # Keyboard Filter 
 $ConfigureKeyboardFilter=$TRUE
 $FilteredKeys=@("Ctrl+Alt+Del","Win+L","Win+E","Win+R")
+$BreakoutKey="91" #in DEC
+	# This setting specifies the scan code of the key that enables a user to break out of an account that is locked down with Keyboard Filter.
+    # A user can press this key consecutively five times to switch to the Welcome screen.
+    # The scan code of the key can be looked up here:  
+    # https://kbdlayout.info/KBDGR/scancodes?arrangement=ISO105
+    # By default, the BreakoutKeyScanCode is set to the scan code for the left Windows logo key (HEX=5B, DEC=91).
 $DisableKeyboardFilterForAdministrator=$TRUE
 ###########################
 # Unbranded Boot 
@@ -410,11 +416,28 @@ function Set-DisableKeyboardFilterForAdministrators([Bool] $Value) {
     }
 }
 
+function Set-BreakoutMode($Value) {
+
+
+    $Setting  =  Get-Setting("BreakoutKeyScanCode")
+    if ($Setting) {
+    
+        $Setting.Value = $Value
+        $Setting.Put() | Out-Null;
+        Log-Message ("Configure the scan code "+$Value+" as Breakout Key")
+    } else {
+        
+        Log-Message ("Unable to find BreakoutKeyScanCode setting")
+    }
+}
+
 function Configure-KeyboardFilter
 {
     Set-Service -Name MsKeyboardFilter -StartupType Automatic -Status Running -PassThru
     # Disable keyboard filter for Administrator account
     Set-DisableKeyboardFilterForAdministrators $DisableKeyboardFilterForAdministrator
+    #Configure the Breakout Key
+    Set-BreakoutMode $BreakoutKey
 
     # Enable filters
     # Key combinaitons listed below will not be actioned
@@ -447,7 +470,8 @@ function Configure-KeyboardFilter
             if ($_.Enabled) {
                 "{0}+{1:X4}" -f $_.Modifiers, $_.Scancode
             }
-        }  
+        } 
+
 }
 
 function Configure-UnbrandedBoot

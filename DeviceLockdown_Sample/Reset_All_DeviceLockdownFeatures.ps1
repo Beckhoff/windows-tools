@@ -89,7 +89,8 @@ $IsShellLauncherEnabled = $Global:ShellLauncherClass.IsEnabled()
 
 Log-Message ("Shell Launcher Status is set to " + $IsShellLauncherEnabled.Enabled)
 #Disable shell launcher feature without restart		
-Disable-WindowsOptionalFeature -Online -FeatureName Client-EmbeddedShellLauncher -NoRestart -OutVariable result			
+Disable-WindowsOptionalFeature -Online -FeatureName Client-EmbeddedShellLauncher -NoRestart -OutVariable result
+
 
 #Detect if restart is needed
 if ($result.RestartNeeded -eq $true)
