@@ -8,13 +8,13 @@ Running the following commands will help you to gather system information using 
 #### 1.	General Baseboard Information:
 
 ```
-wmic baseboard list full
+Get-WmiObject Win32_BaseBoard | Format-List *
 ```
 
 Output is for example:  
 ```
-Product: CB6464  
-Version: G3
+Product: CB7476  
+Version: G2
 ```
 
 #### 2.	Installed Windows Updates:
@@ -22,11 +22,7 @@ Version: G3
 You can get a brief overview of the installed updates in the command line via the following command:
 
 ```
-Wmic qfe list brief
-```
-or
-```
-Wmic qfe list 
+Get-WmiObject Win32_QuickFixEngineering | Select-Object HotFixID, Description, InstalledOn
 ```
 
 to get a complete overview of all updates and their information (e.g. description, caption, etc.).
@@ -34,24 +30,23 @@ to get a complete overview of all updates and their information (e.g. descriptio
 #### 3.	OS Build:
 
 ```
-Wmic os get BuildNumber
+(Get-WmiObject Win32_OperatingSystem).BuildNumber
 ```
 
 Output is:  
 ```
-Buildnumber
-14393
+26100
 ```
 
 ## 2.2.	Using Registry
 
-With the help of the CMD, information about the image can be read out easily. For example, all keys and values under a registry key can be read out as follows:
+With the help of PowerShell, information about the image can be read out easily. For example, all keys and values under a registry key can be read out as follows:
 ```
-reg query <keyname> <valuename> /v
+Get-ItemProperty [-Path] [-Name]
 ```
 And the value of a specific key as follows:
 ```
-reg query <keyname> /s
+Get-ItemPropertyValue [-Path] [-Name]
 ```
 
 Image and device information in Beckhoff Images can be found at:
@@ -62,84 +57,84 @@ HKLM\SOFTWARE\Beckhoff\IPC
 #### 1.	Image Version:
 **Get image:**  
 ```
-Reg query HKLM\SOFTWARE\Beckhoff\IPC /v Image
+Get-ItemPropertyValue 'HKLM:\SOFTWARE\Beckhoff\IPC' 'Image'
 ```
 
 Output is for example:
 ```  
-Image      REG_SZ      IN-0406-0112-02-1
+IN-1211-0712-11-1
 ```
 
 **Get version:**  
 ```
-Reg query HKLM\SOFTWARE\Beckhoff\IPC /v Version
+Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\Beckhoff\IPC' 'Version'
 ```
 
 Output is for example:  
 ```
-Version       REG_SZ       2020-20-0001U
+2025-12-00051
 ```
 
 **Get edition:**  
 ```
-Reg query HKLM\SOFTWARE\Beckhoff\IPC /v EditionId
+Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\Beckhoff\IPC' 'EditionId'
 ```
 
 Output is for example:  
 ``` 
-EditionId       REG_SZ       2016 LTSB
+2024 LTSC
 ``` 
 #### 2.	Driver Package
 **Get driver package:**  
 
 ```
-Reg query HKLM\SOFTWARE\Beckhoff\IPC /v DriverPackage
+Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\Beckhoff\IPC' 'DriverPackage'
 ```
 
 Output is for example:  
 ```
-Driverpackage       REG_SZ       3.1.8
+8.11.6.0
 ```
 
 #### 3.	Baseboard:
 **Get baseboard:**  
 ```
-Reg query HKLM\SOFTWARE\Beckhoff\IPC /v platform
+Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\Beckhoff\IPC' 'Platform'
 ```
 
 Output is for example:  
 ```
-Platform       REG_SZ       CB3064
+CB7476
 ```
 
 #### 4.	Device information:
 **Get computer name:**  
 ```
-Reg query HKLM\SOFTWARE\Beckhoff\IPC /v LastComputerName
+Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\Beckhoff\IPC' 'LastComputerName'
 ```
 
 Output is for example:  
 ```
-LastComputerName       REG_SZ       CP-XXXXXX
+CP-XXXXXX
 ```
 
 **Get MAC:**  
 ```
-Reg query HKLM\SOFTWARE\Beckhoff\IPC /v FirstMACId
+Get-WmiObject win32_networkadapterconfiguration | select description, macaddress
 ```
 
 Output is for example:  
 ```
-LastComputerName       REG_BINARY       0000105xxxxxx
+Intel(R) Ethernet Controller I226-IT      00:01:05:XX:XX:XX
 ```
 
 #### 5.	OS Update Build Revision
-**Get Update Build Revision in hex:**  
+**Get Update Build Revision:**  
 ```
-Reg query “HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion” /v UBR 
+Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion' 'UBR'
 ```
 
 Output is for example: 
 ``` 
-LastComputerName       REG_DWORD       0xea6
+4351
 ```
