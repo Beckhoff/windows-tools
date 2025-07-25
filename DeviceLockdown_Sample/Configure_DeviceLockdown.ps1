@@ -207,7 +207,21 @@ function Enable-LockdownFeatures
     # If feature installed and requires restart, then restart		
     if ($restartneeded -eq $TRUE)
     {
-        Restart-Computer -Confirm:$TRUE -Force
+        $Message = "A restart is required for changes to take effect before continuing."
+        Log-Message ($Message)
+        Write-Host $Message 
+
+        $Message = "You must restart the script manually after the restart has completed."
+        Log-Message ($Message)
+        Write-Host $Message -ForegroundColor Yellow
+
+
+        Write-Host "Do you want to restart now? [Y/N]"
+        $confirmation = Read-Host
+
+        if ($confirmation -eq "y" -or $confirmation -eq "Y") {
+            Restart-Computer -Force
+        }
         Exit
     }
 
