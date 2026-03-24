@@ -5,6 +5,10 @@ for Windows Images made by Beckhoff.
 
 ## Content
 
+* **[BeckhoffServiceTool_Samples](BeckhoffServiceTool_Samples/README.md)**
+
+    These examples can be used to modify the image before or after reste, stop TwinCAT System Service offline,
+
 * **[Bitlocker_Samples](Bitlocker_Samples/README.md)**
     
     These examples can be used to configure or modify the bitlocker settings e.g. turn on / off
